@@ -12,7 +12,10 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <main>
-        <p>Cart is empty</p>
+        <div className="empty-cart">
+          <h2>Your Shopping Cart is Empty</h2>
+          <p>You have no items in your shopping cart. Start adding some!</p>
+        </div>
       </main>
     );
   }

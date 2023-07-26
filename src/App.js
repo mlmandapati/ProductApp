@@ -22,11 +22,18 @@ class App extends Component {
         {/* <Navbar /> */}
         <Navbar bg="light" data-bs-theme="light">
         <Container>
-          <Navbar.Brand href="/"><strong>Shopperverse</strong></Navbar.Brand>
+          
           <Nav className="me-auto">
-            <Nav.Link href="/products?category=bltffb98c274984c1b9">Men</Nav.Link>
-            <Nav.Link href="/products?category=blt27cb90bfbc15ac7e">Women</Nav.Link>
-            <Nav.Link href="/products?category=blt2e792be825c40bdd">Shoes</Nav.Link>
+          <Link className="nav-link" to="/"><strong>Shopperverse</strong></Link>
+            <Link className="nav-link" to="/products?category=bltffb98c274984c1b9">
+                    Men
+                    </Link>
+                    <Link className="nav-link" to="/products?category=blt27cb90bfbc15ac7e">
+                    Women
+                    </Link>
+                    <Link className="nav-link" to="/products?category=blt2e792be825c40bdd">
+                    Shoes
+                    </Link>
 
           </Nav>
           <DisplayCartIcon/>

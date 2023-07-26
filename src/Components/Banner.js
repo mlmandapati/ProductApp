@@ -8,14 +8,12 @@ export default function Banner(props) {
 
   return (
     <Container>
-      <h2>Sponsored</h2>
       {topRated.length > 0 && (
         <Carousel>
           {topRated.map((product, index) => (
             <Carousel.Item interval={1500}>
               <div className="d-flex justify-content-center">
                 <img
-                  style={{ height: "500px", width: "500px" }}
                   src={product.product_image?.[0].url}
                   alt="product_image"
                 />

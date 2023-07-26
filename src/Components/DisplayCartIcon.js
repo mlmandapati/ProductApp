@@ -3,15 +3,9 @@ import { CartIcon } from "../icons";
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
 
-const Navbar = () => {
+const DisplayCartIcon = () => {
   const items = useCart();
   return (
-    <nav>
-      <div className="nav-center">
-        <Link to="/">
-          {" "}
-          <h2>HOME PAGE</h2>{" "}
-        </Link>
 
         <Link to="/cart">
           <div className="nav-container">
@@ -21,9 +15,7 @@ const Navbar = () => {
             </div>
           </div>
         </Link>
-      </div>
-    </nav>
   );
 };
 
-export default Navbar;
+export default DisplayCartIcon;

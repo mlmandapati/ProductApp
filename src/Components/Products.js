@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import ProductDetails from "./ProductDetails.js";
 import ProductBox from "./ProductBox.js";
-import SingleProduct from "./SingleProduct.js";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
@@ -53,8 +53,7 @@ export default function Products(props) {
 
   return (
     <Container>
-      <h1>List of Products</h1>
-
+      <br/>
       <Row>
         {products.length > 0 &&
           (category === "all"
@@ -64,7 +63,7 @@ export default function Products(props) {
                   className="mb-3"
                   key={index}
                 >
-                  <SingleProduct product={filteredProduct} />
+                  <ProductBox product={filteredProduct} />
                 </Col>
               ))
             : products
@@ -76,7 +75,7 @@ export default function Products(props) {
                     className="mb-3"
                     key={index}
                   >
-                    <SingleProduct product={filteredProduct} />
+                    <ProductBox product={filteredProduct} />
                   </Col>
                 )))}
       </Row>

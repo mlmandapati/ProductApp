@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import ProductDetails from "./ProductDetails.js";
 import ProductBox from "./ProductBox.js";
-import SingleProduct from "./SingleProduct.js";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
@@ -46,14 +46,14 @@ export default function Categories(props) {
   return (
     <Container>
       <br />
-      <h3>CATEGORIES TO SHOP</h3>
+      <h4>CATEGORIES TO SHOP</h4>
 
       <Row>
         {categories.length > 0 &&
           categories.map((category, index) => (
             <Col
               key={category}
-              md="4"
+              sm={8} md={4} lg={2}
               className="mb-3"
             >
               <Card className="mb-3">

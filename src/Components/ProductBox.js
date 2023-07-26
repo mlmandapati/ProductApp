@@ -33,7 +33,7 @@ export default function ProductBox(props) {
       <div className="product-card-img-wrap">
         <div className='product-card-img-inner'>
         <Link to={`/product/${product.uid}`}>
-          <img src={product.image.url} style={{width:"100%", height:"400px", padding:"1rem", margin:"1rem"}}/>
+          <img src={product.image.url} style={{width:"100%", height:"400px", padding:"8px"}}/>
         </Link>
         </div>
         <div className='product-title' style={{textalign:"center", textDecoration:"none"}}>
@@ -46,7 +46,7 @@ export default function ProductBox(props) {
     </a>
     
     {  showAddToCart &&  (<button
-         className="button button--full add-to-cart" onClick={addToCart}>
+         className="button button--full add-to-cart"  onClick={addToCart}>
           <span>Add to Cart</span>
       </button>)
 }

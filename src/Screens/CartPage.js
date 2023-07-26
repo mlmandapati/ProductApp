@@ -1,5 +1,8 @@
 import { useCart, useDispatchCart } from "../Context/CartContext";
 import CartItem from "../Components/CartItem";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 export default function CartPage() {
   const items = useCart();
   console.log(items);
@@ -18,17 +21,21 @@ export default function CartPage() {
   }
 
   return (
-    <main>
-      {items.map((item, index) => (
-        <div>
+    <Container>
+      <Row>
+        {items.map((item, index) => (
+        <Col  md={3}
+        className="mb-3"
+        key={index}>
           <CartItem
             handleRemove={handleRemove}
             key={index}
             product={item}
             index={index}
           />
-        </div>
+        </Col>
       ))}
-    </main>
+      </Row>
+    </Container>
   );
 }

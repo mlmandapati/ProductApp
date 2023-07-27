@@ -1,8 +1,7 @@
 import "./App.css";
+import "./styles.css";
 import ProductDetails from "./Components/ProductDetails";
 import Products from "./Components/Products";
-// import Navbar from "./Components/Navbar";
-import "./styles.css";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./Screens/Home";
@@ -18,8 +17,6 @@ class App extends Component {
   render() {
     return (
       <Router>
-        {/* <Navbar /> */}
-
         <Navbar
           bg="light"
           data-bs-theme="light"

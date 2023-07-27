@@ -30,11 +30,11 @@ export default function CartPage() {
           <Col
             md={3}
             className="mb-3"
-            key={index}
+            // key={index}
           >
             <CartItem
-              handleRemove={handleRemove}
-              key={index}
+              // handleRemove={handleRemove}
+              // key={index}
               product={item}
               index={index}
             />

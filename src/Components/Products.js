@@ -19,7 +19,7 @@ export default function Products(props) {
 
   const category = searchParam.get("category") || "all";
   const searchText = searchParam.get("search") || "";
-  console.log("searchText", searchText);
+  // console.log("searchText", searchText);
   //url to fetch the recepies
   const url = `https://cdn.contentstack.io/v3/content_types/${props.type}/entries?environment=preview`;
 

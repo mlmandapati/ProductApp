@@ -68,7 +68,7 @@ export default function Home(props) {
   console.log(blocks);
   return (
     <div>
-      {console.log("blocks", blocks[0])}
+      {/* {console.log("blocks", blocks[0])} */}
 
       {blocks.length > 0 &&
         blocks?.map((block, index) => {

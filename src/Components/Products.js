@@ -5,8 +5,8 @@ import ProductBox from "./ProductBox.js";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import { useDispatchCart } from "../Context/CartContext";
 
 export default function Products(props) {
@@ -14,10 +14,8 @@ export default function Products(props) {
   const { search } = useLocation();
   const searchParam = new URLSearchParams(search);
   const base_url = "graphql.contentstack.com";
-  const environment ="preview";
+  const environment = "preview";
   const api_key = "blt3815e63116cffb83";
-  
-
 
   const category = searchParam.get("category") || "all";
   const searchText = searchParam.get("search") || "";
@@ -58,9 +56,7 @@ export default function Products(props) {
   //   },
   //   body: JSON.stringify({query: PRODUCTS_QUERY})
 
-
   // }
-
 
   async function getData() {
     try {
@@ -84,27 +80,41 @@ export default function Products(props) {
   }, [props]);
 
   const sortProducts = (sortOrder) => {
-    if(sortOrder === 'lowToHigh'){
-      products.sort((a,b) => a.product_price-b.product_price);
-    }else if(sortOrder === 'highToLow'){
-      products.sort((a,b) => b.product_price-a.product_price);
+    if (sortOrder === "lowToHigh") {
+      products.sort((a, b) => a.product_price - b.product_price);
+    } else if (sortOrder === "highToLow") {
+      products.sort((a, b) => b.product_price - a.product_price);
     }
     setSortBy(sortOrder);
-  }
+  };
   return (
     <Container>
       <br />
-      <div style={{margin:"8px", padding:"8px"}} >
-      <label htmlFor="sortSelect">Sort by:</label>
-      <select
-        id="sortSelect"
-        value={sortBy}
-        onChange={(e) => sortProducts(e.target.value)}
+      <div
+        id="sort_container"
+        style={{
+          margin: "8px",
+          paddingBottom: "11px",
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
       >
-        <option value="lowToHigh">Price Low to High</option>
-        <option value="highToLow">Price High to Low</option>
-      </select>
-    </div>
+        <label
+          style={{ paddingTop: "5px", fontWeight: "bold" }}
+          htmlFor="sortSelect"
+        >
+          Sort by :
+        </label>
+        <select
+          style={{ marginLeft: "8px" }}
+          id="sortSelect"
+          value={sortBy}
+          onChange={(e) => sortProducts(e.target.value)}
+        >
+          <option value="lowToHigh">Price - Low to High</option>
+          <option value="highToLow">Price - High to Low</option>
+        </select>
+      </div>
       {
         <Row>
           {products.length > 0 &&

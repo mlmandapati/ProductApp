@@ -46,14 +46,16 @@ export default function Categories(props) {
   return (
     <Container>
       <br />
-      <h4>CATEGORIES TO SHOP</h4>
+      <h4>Categories</h4>
 
       <Row>
         {categories.length > 0 &&
           categories.map((category, index) => (
             <Col
               key={category}
-              sm={8} md={4} lg={2}
+              sm={8}
+              md={4}
+              lg={2}
               className="mb-3"
             >
               <Card className="mb-3">

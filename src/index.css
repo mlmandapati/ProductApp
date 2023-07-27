@@ -97,3 +97,17 @@ nav svg {
   margin-top: 5rem;
   margin-bottom: 5rem;
 }
+
+#sortSelect {
+  text-align: left;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  padding: 5px;
+  background-color: rgb(240, 234, 234);
+  border-radius: 10px;
+  position: absolute;
+}
+
+.me-auto {
+  font-size: 19px;
+}

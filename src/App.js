@@ -12,7 +12,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import DisplayCartIcon from "./Components/DisplayCartIcon";
-import Navbartest from "./Components/Navbartest";
 import SearchBar from "./Components/SearchBar";
 
 class App extends Component {

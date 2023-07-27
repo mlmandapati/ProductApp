@@ -14,6 +14,9 @@ export default function ProductDetails() {
   const contentTypeId = "product_";
   const entryUid = id;
   const environmentName = "preview";
+  const base_url = "graphql.contentstack.com";
+  const api_key = "blt3815e63116cffb83";
+  const entry_uid = id;
 
   //url to fetch the recepies
 
@@ -30,15 +33,43 @@ export default function ProductDetails() {
     },
   };
 
+  const PRODUCT_QUERY = `
+  query fetchProduct($entry_uid: String!) {
+    product_(uid: $entry_uid) {
+    title
+    description
+    product_price
+    imageConnection{
+        edges{
+            node{
+                url
+            }
+        }
+    }
+  }
+  }`;
+
+  const graphqlURL = `https://${base_url}/stacks/${api_key}?environment=${environmentName}`
+
+  const graphqlOptions = {
+    method: "POST",
+    headers: {
+      access_token: "cs8db86493b65d47aa5ee93e0e",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({query: PRODUCT_QUERY,
+    variables: {entry_uid}})
+
+
+  }
+
   async function getSingleEntry() {
     try {
-      const response = await fetch(url, options);
-      console.log("Single Entry response", response);
+      const response = await fetch(graphqlURL, graphqlOptions);
       const result = await response.text();
       const parsedResult = JSON.parse(result);
-      setContent(parsedResult);
-
-      // console.log("Single Entry response", parsedResult);
+      setContent(parsedResult.data);
+      console.log("Single Entry response", parsedResult);
       // const parsedResult = JSON.parse(result);
       // setData(parsedResult.results);
       // console.log("after fetch", data);
@@ -64,8 +95,8 @@ export default function ProductDetails() {
         <Row>
           <Col md={6}>
             <img
-              src={content.entry.image.url}
-              alt={content.entry.title}
+              src={content.product_.imageConnection.edges?.[0].node.url}
+              alt={content.product_.title}
               style={{
                 width: "100%",
                 height: "500px",
@@ -76,20 +107,20 @@ export default function ProductDetails() {
           <Col md={6}>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h1>{content.entry.title}</h1>
+                <h1>{content.product_.title}</h1>
               </ListGroup.Item>
               <ListGroup.Item>
-                Price: ${content.entry.product_price}
+                Price: ${content.product_.product_price}
               </ListGroup.Item>
               <ListGroup.Item>
                 <strong>Description:</strong>
-                <p>{content.entry.description}</p>
+                <p>{content.product_.description}</p>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
                   variant="outline-primary"
                   onClick={() => {
-                    addToCart(content.entry);
+                    addToCart(content.product_);
                   }}
                 >
                   Add to Cart

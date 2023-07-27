@@ -1,4 +1,6 @@
 const CartItem = ({ product, index, handleRemove }) => {
+
+  console.log("Cart Item", product);
   return (
     // <article>
     //   <img
@@ -18,7 +20,7 @@ const CartItem = ({ product, index, handleRemove }) => {
     <a className='product-card__link ss-pointer' style={{textalign:"center", textDecoration:"none"}}>
       <div className="product-card-img-wrap">
         <div className='product-card-img-inner'>
-          <img src={product.image.url} style={{width:"100%", height:"400px", padding:"1rem", margin:"1rem"}}/>
+           {product.image ? <img src={product.image.url} style={{width:"100%", height:"400px", padding:"1rem", margin:"1rem"}}/> : <img src={product.imageConnection.edges?.[0].node.url} style={{width:"100%", height:"400px", padding:"1rem", margin:"1rem"}}/> }
         </div>
         <div className='product-title' style={{textalign:"center", textDecoration:"none"}}>
          {product.title}
@@ -30,7 +32,7 @@ const CartItem = ({ product, index, handleRemove }) => {
     </a>
     
     { <button
-         className="button button--full add-to-cart" onClick={() => handleRemove(index)}>
+         className="button button--full add-to-cart" onClick={() => handleRemove(index)} style={{backgroudColor:"red"}}>
           <span>Remove from Cart</span>
       </button>
 }

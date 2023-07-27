@@ -11,6 +11,11 @@ export default function Products(props) {
   const navigate = useNavigate();
   const { search } = useLocation();
   const searchParam = new URLSearchParams(search);
+  const base_url = "graphql.contentstack.com";
+  const environment ="preview";
+  const api_key = "blt3815e63116cffb83";
+  
+
 
   const category = searchParam.get("category") || "all";
   const searchText = searchParam.get("search") || "";
@@ -18,7 +23,6 @@ export default function Products(props) {
   //url to fetch the recepies
   const url = `https://cdn.contentstack.io/v3/content_types/${props.type}/entries?environment=preview`;
 
-  const [products, setProducts] = useState([]);
 
   const options = {
     method: "GET",
@@ -29,12 +33,40 @@ export default function Products(props) {
     },
   };
 
+  // const PRODUCTS_QUERY = `{
+  //   all_product_ {
+  //     total
+  //     items{
+  //       title
+  //     }
+  //   }
+  // }`;
+
+  // //GraphQL API details
+
+  // const graphqlURL = `https://${base_url}/stacks/${api_key}?environment=${environment}`
+
+  // const graphqlOptions = {
+  //   method: "POST",
+  //   headers: {
+  //     access_token: "cs8db86493b65d47aa5ee93e0e",
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({query: PRODUCTS_QUERY})
+
+
+  // }
+
+  
+  const [products, setProducts] = useState([]);
+
+
   async function getData() {
     try {
       const response = await fetch(url, options);
       const result = await response.text();
       const parsedResult = await JSON.parse(result);
-      //   console.log("response", result);
+      console.log("response", result);
       setProducts(parsedResult.entries);
       // console.log("products", products);
 

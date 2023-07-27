@@ -7,11 +7,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatchCart } from "../Context/CartContext";
-<<<<<<< HEAD
 import { Helmet } from 'react-helmet';
-=======
 import ReadOutLout from "./ReadOutLout";
->>>>>>> 6711ca6b0363cc2ac4ef8f71c60baa2fea480e91
 
 export default function ProductDetails() {
   const params = useParams();

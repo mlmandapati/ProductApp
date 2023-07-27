@@ -11,8 +11,10 @@ export default function Products(props) {
   const navigate = useNavigate();
   const { search } = useLocation();
   const searchParam = new URLSearchParams(search);
-  const category = searchParam.get("category") || "all";
 
+  const category = searchParam.get("category") || "all";
+  const searchText = searchParam.get("search") || "";
+  console.log("searchText", searchText);
   //url to fetch the recepies
   const url = `https://cdn.contentstack.io/v3/content_types/${props.type}/entries?environment=preview`;
 
@@ -34,7 +36,7 @@ export default function Products(props) {
       const parsedResult = await JSON.parse(result);
       //   console.log("response", result);
       setProducts(parsedResult.entries);
-      //   console.log("products", products);
+      // console.log("products", products);
 
       // const parsedResult = JSON.parse(result);
       // setData(parsedResult.results);
@@ -53,10 +55,57 @@ export default function Products(props) {
 
   return (
     <Container>
-      <br/>
-      <Row>
+      <br />
+      {
+        <Row>
+          {products.length > 0 &&
+            (searchText !== ""
+              ? products
+                  .filter((product) =>
+                    product.title
+                      .toLowerCase()
+                      .includes(searchText.toLowerCase())
+                  )
+                  .map((filteredProduct, index) => (
+                    <Col
+                      sm={6}
+                      lg={4}
+                      className="mb-3"
+                      key={index}
+                    >
+                      <ProductBox product={filteredProduct} />
+                    </Col>
+                  ))
+              : products.length > 0 &&
+                (category === "all"
+                  ? products.map((filteredProduct, index) => (
+                      <Col
+                        md={3}
+                        className="mb-3"
+                        key={index}
+                      >
+                        <ProductBox product={filteredProduct} />
+                      </Col>
+                    ))
+                  : products
+                      .filter(
+                        (product) => product.category?.[0].uid === category
+                      )
+                      .map((filteredProduct, index) => (
+                        <Col
+                          sm={6}
+                          lg={4}
+                          className="mb-3"
+                          key={index}
+                        >
+                          <ProductBox product={filteredProduct} />
+                        </Col>
+                      ))))}
+        </Row>
+      }
+      {/* <Row>
         {products.length > 0 &&
-          (category === "all"
+          (category === "all" && searchText === ""
             ? products.map((filteredProduct, index) => (
                 <Col
                   md={3}
@@ -67,7 +116,7 @@ export default function Products(props) {
                 </Col>
               ))
             : products
-                .filter((product) => product.category?.[0].uid == category)
+                .filter((product) => product.category?.[0].uid === category)
                 .map((filteredProduct, index) => (
                   <Col
                     sm={6}
@@ -78,7 +127,7 @@ export default function Products(props) {
                     <ProductBox product={filteredProduct} />
                   </Col>
                 )))}
-      </Row>
+      </Row> */}
     </Container>
   );
 }

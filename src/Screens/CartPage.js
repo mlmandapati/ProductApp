@@ -27,17 +27,19 @@ export default function CartPage() {
     <Container>
       <Row>
         {items.map((item, index) => (
-        <Col  md={3}
-        className="mb-3"
-        key={index}>
-          <CartItem
-            handleRemove={handleRemove}
+          <Col
+            md={3}
+            className="mb-3"
             key={index}
-            product={item}
-            index={index}
-          />
-        </Col>
-      ))}
+          >
+            <CartItem
+              handleRemove={handleRemove}
+              key={index}
+              product={item}
+              index={index}
+            />
+          </Col>
+        ))}
       </Row>
     </Container>
   );

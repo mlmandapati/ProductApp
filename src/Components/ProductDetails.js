@@ -33,9 +33,11 @@ export default function ProductDetails() {
   async function getSingleEntry() {
     try {
       const response = await fetch(url, options);
+      console.log("Single Entry response", response);
       const result = await response.text();
       const parsedResult = JSON.parse(result);
       setContent(parsedResult);
+
       // console.log("Single Entry response", parsedResult);
       // const parsedResult = JSON.parse(result);
       // setData(parsedResult.results);
@@ -57,7 +59,7 @@ export default function ProductDetails() {
 
   return (
     <Container>
-      <br/>
+      <br />
       {content && (
         <Row>
           <Col md={6}>

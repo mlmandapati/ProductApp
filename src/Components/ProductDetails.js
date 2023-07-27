@@ -7,7 +7,11 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatchCart } from "../Context/CartContext";
+<<<<<<< HEAD
 import { Helmet } from 'react-helmet';
+=======
+import ReadOutLout from "./ReadOutLout";
+>>>>>>> 6711ca6b0363cc2ac4ef8f71c60baa2fea480e91
 
 export default function ProductDetails() {
   const params = useParams();
@@ -54,7 +58,7 @@ export default function ProductDetails() {
   }
   }`;
 
-  const graphqlURL = `https://${base_url}/stacks/${api_key}?environment=${environmentName}`
+  const graphqlURL = `https://${base_url}/stacks/${api_key}?environment=${environmentName}`;
 
   const graphqlOptions = {
     method: "POST",
@@ -62,11 +66,8 @@ export default function ProductDetails() {
       access_token: "cs8db86493b65d47aa5ee93e0e",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({query: PRODUCT_QUERY,
-    variables: {entry_uid}})
-
-
-  }
+    body: JSON.stringify({ query: PRODUCT_QUERY, variables: { entry_uid } }),
+  };
 
   async function getSingleEntry() {
     try {
@@ -90,7 +91,6 @@ export default function ProductDetails() {
 
   const dispatch = useDispatchCart();
   const addToCart = (product) => {
-    console.log("------product", product);
     dispatch({ type: "ADD", product });
   };
 
@@ -140,6 +140,9 @@ export default function ProductDetails() {
                 </Button>
               </ListGroup.Item>
             </ListGroup>
+          </Col>
+          <Col>
+            <ReadOutLout product={content.product_} />
           </Col>
         </Row>
       )}

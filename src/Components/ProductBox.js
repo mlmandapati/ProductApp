@@ -21,6 +21,32 @@ export default function ProductBox(props) {
     setShowAddToCart(false);
   };
 
+  const renderStars = () => {
+    const rating = props.product.rating;
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating - fullStars >= 0.5;
+
+    const stars = [];
+
+    // Render full stars
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<span key={i}>&#9733;</span>);
+    }
+
+    // Render half star if applicable
+    if (hasHalfStar) {
+      stars.push(<span key={fullStars}>&#9733;&#189;</span>);
+    }
+
+    // Render empty stars to fill up the remaining
+    for (let i = stars.length; i < 5; i++) {
+      stars.push(<span key={i}>&#9734;</span>);
+    }
+
+    return stars;
+  };
+
+
   return (
     <form
       onMouseEnter={handleOnMouseEnter}
@@ -52,46 +78,15 @@ export default function ProductBox(props) {
             ${product.product_price}
           </div>
         </div>
-      </a>
-
-      {showAddToCart && (
-        <button
-          className="button button--full add-to-cart"
-          onClick={addToCart}
-        >
+        <div className="star-rating" style={{ textAlign: "center" }}>{renderStars()}</div>
+    </a>
+    
+    {  showAddToCart &&  (<button
+         className="button button--full add-to-cart"  onClick={addToCart}>
           <span>Add to Cart</span>
-        </button>
-      )}
-    </form>
-
-    // <Card>
-    //  <Link to={`/product/${product.uid}`}>
-    //     <img
-    //       src={product.image.url}
-    //       className="card-img-top"
-    //       alt={product.title}
-    //       style={{
-    //         width: "100%",
-    //         height: "400px",
-    //         padding: "5px",
-    //       }}
-    //     />
-    //   </Link>
-    //   <Card.Body>
-    //     <Card.Title style={{ color: "#4447e0" }}>{product.title}</Card.Title>
-
-    //     <Card.Text>${product.product_price}</Card.Text>
-    //     <Row>
-    //       <Col>
-    //         <Button
-    //           variant="outline-primary"
-    //           onClick={() => addToCart(product)}
-    //         >
-    //           Add to Cart
-    //         </Button>
-    //       </Col>
-    //     </Row>
-    //   </Card.Body>
-    // </Card>
+      </button>)
+    }
+      
+  </form>
   );
 }

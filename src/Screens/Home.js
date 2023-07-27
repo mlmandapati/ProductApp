@@ -3,7 +3,6 @@ import Banner from "../Components/Banner";
 import Categories from "../Components/Categories";
 
 export default function Home(props) {
-  //url to fetch the recepies
   const url = `https://cdn.contentstack.io/v3/content_types/${props.type}/entries?environment=preview`;
 
   //const [list, setList] = useState([]);
@@ -66,6 +65,7 @@ export default function Home(props) {
     // console.log("Blocks", blocks);
   }, [props]);
 
+  console.log(blocks);
   return (
     <div>
       {console.log("blocks", blocks[0])}
@@ -75,9 +75,6 @@ export default function Home(props) {
           if (block.banner) {
             return <Banner top_rated={block.banner.top_rated} />;
           }
-          // if(block.list_of_products){
-          //     return <h2>Products</h2>
-          // }
           if (block.categories) {
             return <Categories type="category_product" />;
           }

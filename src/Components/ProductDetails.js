@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,6 +9,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatchCart } from "../Context/CartContext";
 import { Helmet } from 'react-helmet';
 import ReadOutLout from "./ReadOutLout";
+import { alignPropType } from "react-bootstrap/esm/types";
+import { AiOutlineSound } from 'react-icons/ai';
 
 export default function ProductDetails() {
   const params = useParams();
@@ -80,15 +82,51 @@ export default function ProductDetails() {
       console.log(error);
     }
   }
-
+  
   useEffect(() => {
     getSingleEntry();
 
   }, [entryUid, contentTypeId]);
 
+  
   const dispatch = useDispatchCart();
   const addToCart = (product) => {
     dispatch({ type: "ADD", product });
+  };
+
+  
+
+  const speechRef = useRef(null);
+
+  const readProductDescription = () => {
+    if ('speechSynthesis' in window) {
+      if (speechRef.current) {
+        window.speechSynthesis.cancel();
+      }
+      const titleSpeech = new SpeechSynthesisUtterance(content.product_.title);
+      const priceSpeech = new SpeechSynthesisUtterance("Price of the product is"+content.product_.product_price+"Dollars");
+      const speech = new SpeechSynthesisUtterance("Description "+content.product_.description);
+      speech.lang = 'en-US';
+      speech.volume = 1; // Range from 0 to 1
+      speech.rate = 1; // Range from 0.1 to 10
+      speech.pitch = 1; // Range from 0 to 2
+
+      // Store the speech synthesis object in the ref for cleanup
+      speechRef.current = speech;
+
+      window.speechSynthesis.speak(titleSpeech);
+      window.speechSynthesis.speak(priceSpeech);
+      window.speechSynthesis.speak(speech);
+      
+    } else {
+      alert('Text-to-speech is not supported in this browser.');
+    }
+  };
+
+  const stopReading = () => {
+    if ('speechSynthesis' in window && speechRef.current) {
+      window.speechSynthesis.cancel();
+    }
   };
 
   return (
@@ -117,7 +155,9 @@ export default function ProductDetails() {
           <Col md={6}>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h1>{content.product_.title}</h1>
+                <div className="speech-icon" onClick={readProductDescription}>
+                   {content.product_.title} <AiOutlineSound size={45} color="black" />
+              </div>
               </ListGroup.Item>
               <ListGroup.Item>
                 Price: ${content.product_.product_price}
@@ -138,9 +178,10 @@ export default function ProductDetails() {
               </ListGroup.Item>
             </ListGroup>
           </Col>
-          <Col>
-            <ReadOutLout product={content.product_} />
-          </Col>
+          {/* <div style={{alignItems:"center"}}>
+              <button style={{padding:"8px", margin:"8px", width:"200px"}}onClick={readProductDescription}>Read Description</button>
+              <button style={{padding:"8px", margin:"8px", width:"200px"}} onClick={stopReading}>Stop Reading</button>
+          </div> */}
         </Row>
       )}
     </Container>

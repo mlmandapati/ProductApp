@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "./Context/CartContext.js";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 // import { createStore } from 'redux';
 // import addCart from './reducers/addCart.js';
 // import { Provider } from 'react-redux';

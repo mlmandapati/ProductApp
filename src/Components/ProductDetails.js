@@ -7,6 +7,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatchCart } from "../Context/CartContext";
+import { Helmet } from 'react-helmet';
 
 export default function ProductDetails() {
   const params = useParams();
@@ -46,6 +47,10 @@ export default function ProductDetails() {
             }
         }
     }
+    seo{
+      title
+      keywords
+  }
   }
   }`;
 
@@ -80,6 +85,7 @@ export default function ProductDetails() {
 
   useEffect(() => {
     getSingleEntry();
+
   }, [entryUid, contentTypeId]);
 
   const dispatch = useDispatchCart();
@@ -91,6 +97,13 @@ export default function ProductDetails() {
   return (
     <Container>
       <br />
+      {content && <Helmet>
+        <title>{content.product_.title}</title>
+        <meta name="description" content={content.product_.description} />
+        {content.product_.seo.title && <meta name="keywords" content={content.product_.seo.keywords} />}
+      </Helmet>
+      }
+      
       {content && (
         <Row>
           <Col md={6}>

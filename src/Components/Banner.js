@@ -11,7 +11,7 @@ export default function Banner(props) {
       {topRated.length > 0 && (
         <Carousel>
           {topRated.map((product, index) => (
-            <Carousel.Item interval={1500}>
+            <Carousel.Item key={index} interval={1500}>
               <div className="d-flex justify-content-center">
                 <img
                   src={product.product_image?.[0].url}

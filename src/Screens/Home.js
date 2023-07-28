@@ -66,7 +66,7 @@ export default function Home(props) {
     // console.log("Blocks", blocks);
   }, [props]);
 
-  console.log(blocks);
+  //console.log(blocks);
   return (
     <div>
     <div>
@@ -75,10 +75,10 @@ export default function Home(props) {
       {blocks.length > 0 &&
         blocks?.map((block, index) => {
           if (block.banner) {
-            return <Banner top_rated={block.banner.top_rated} />;
+            return <Banner key = {index} top_rated={block.banner.top_rated} />;
           }
           if (block.categories) {
-            return <Categories type="category_product" />;
+            return <Categories key = {index} type="category_product" />;
           }
         })}
     </div>

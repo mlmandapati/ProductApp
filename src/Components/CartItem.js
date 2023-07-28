@@ -1,4 +1,17 @@
-const CartItem = ({ product, index, handleRemove }) => {
+import { useContext } from "react";
+import { CartStore } from "../Context/CartContext";
+
+function CartItem({ product, index }){
+  const { state, dispatch } = useContext(CartStore);
+
+  const handleRemove = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: 'REMOVE',
+      payload: index,
+    });
+  };
+
   return (
     <form>
       <a
@@ -47,7 +60,7 @@ const CartItem = ({ product, index, handleRemove }) => {
       {
         <button
           className="button button--full add-to-cart"
-          onClick={() => handleRemove(index)}
+          onClick={handleRemove}
         >
           <span>Remove from Cart</span>
         </button>

@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../styles.css";
 import { Link } from "react-router-dom";
-import { useDispatchCart } from "../Context/CartContext";
+import { CartStore, useDispatchCart } from "../Context/CartContext";
 
 export default function ProductBox(props) {
   const product = props.product;
+  const { state, dispatch } = useContext(CartStore);
 
-  const dispatch = useDispatchCart();
   const addToCart = (e) => {
     e.preventDefault();
-    dispatch({ type: "ADD", product });
+    const id = product.uid;
+    const existIteminCart = state.find((x) => x.id === id);
+    const quantity = existIteminCart ? existIteminCart.quantity + 1 : 1;
+    
+    // console.log("product",product);
+    // console.log("quantity",quantity);
+    dispatch({ type: "ADD", payload: {id, product, quantity} });
   };
 
   const [showAddToCart, setShowAddToCart] = useState(false);
@@ -52,7 +58,7 @@ export default function ProductBox(props) {
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
     >
-      <a
+      <div
         className="product-card__link ss-pointer"
         style={{ textalign: "center", textDecoration: "none" }}
       >
@@ -79,10 +85,10 @@ export default function ProductBox(props) {
           </div>
         </div>
         <div className="star-rating" style={{ textAlign: "center" }}>{renderStars()}</div>
-    </a>
+    </div>
     
     {  showAddToCart &&  (<button
-         className="button button--full add-to-cart"  onClick={addToCart}>
+         className="button button--full add-to-cart" onClick={addToCart}>
           <span>Add to Cart</span>
       </button>)
     }

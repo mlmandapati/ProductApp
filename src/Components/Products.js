@@ -64,7 +64,7 @@ export default function Products(props) {
       const response = await fetch(url, options);
       const result = await response.text();
       const parsedResult = await JSON.parse(result);
-      console.log("response", result);
+      // console.log("response", result);
       setProducts(parsedResult.entries);
       //   console.log("products", products);
 

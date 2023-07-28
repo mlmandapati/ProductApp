@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
@@ -12,6 +12,7 @@ import ReadOutLout from "./ReadOutLout";
 import { alignPropType } from "react-bootstrap/esm/types";
 import { AiOutlineSound } from "react-icons/ai";
 import Footer from './Footer.js';
+import { CartStore } from "../Context/CartContext";
 
 export default function ProductDetails() {
   const params = useParams();
@@ -22,6 +23,7 @@ export default function ProductDetails() {
   const base_url = "graphql.contentstack.com";
   const api_key = "blt3815e63116cffb83";
   const entry_uid = id;
+  const navigate = useNavigate();
 
   //url to fetch the recepies
 
@@ -75,7 +77,7 @@ export default function ProductDetails() {
       const result = await response.text();
       const parsedResult = JSON.parse(result);
       setContent(parsedResult.data);
-      console.log("Single Entry response", parsedResult);
+      // console.log("Single Entry response", parsedResult);
       // const parsedResult = JSON.parse(result);
       // setData(parsedResult.results);
       // console.log("after fetch", data);
@@ -88,10 +90,20 @@ export default function ProductDetails() {
     getSingleEntry();
   }, [entryUid, contentTypeId]);
 
-  
-  const dispatch = useDispatchCart();
+
+  // const dispatch = useDispatchCart();
+
+  const {state, dispatch} = useContext(CartStore);
+
   const addToCart = (product) => {
-    dispatch({ type: "ADD", product });
+    const existIteminCart = state.find((x) => x.id === id);
+    const quantity = existIteminCart ? existIteminCart.quantity + 1 : 1;
+    // console.log("id",id);
+    // console.log("product",product);
+    // console.log("quantity",quantity);
+    dispatch({ type: "ADD", payload: {id, product, quantity} });
+    navigate('/cart');
+    
   };
 
   const speechRef = useRef(null);

@@ -69,19 +69,16 @@ export default function Home(props) {
   //console.log(blocks);
   return (
     <div>
-    <div>
-      {/* {console.log("blocks", blocks[0])} */}
 
       {blocks.length > 0 &&
         blocks?.map((block, index) => {
           if (block.banner) {
-            return <Banner key = {index} top_rated={block.banner.top_rated} />;
+            return <Banner key = "banner" top_rated={block.banner.top_rated} />;
           }
           if (block.categories) {
-            return <Categories key = {index} type="category_product" />;
+            return <Categories key = "category" type="category_product" />;
           }
         })}
-    </div>
     <Footer/>
     </div>
   );

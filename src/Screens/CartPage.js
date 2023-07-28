@@ -8,7 +8,8 @@ import Card from 'react-bootstrap/Card';
 import Container from "react-bootstrap/Container";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet , HelmetProvider} from "react-helmet-async";
+import Footer from "../Components/Footer";
 export default function CartPage() {
   // const items = useCart();
   // console.log(items);
@@ -60,7 +61,9 @@ export default function CartPage() {
     //     ))}
     //   </Row>
     // </Container>
+    <div>
     <Container>
+      <HelmetProvider>
     <Helmet>
       <title>Shopping Cart</title>
     </Helmet>
@@ -158,6 +161,10 @@ export default function CartPage() {
         </Card>
       </Col>
     </Row>
+    </HelmetProvider>
   </Container>
+  <div style={{marginTop: "200px"}}><Footer/></div>
+  
+  </div>
   );
 }

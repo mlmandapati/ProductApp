@@ -7,7 +7,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatchCart } from "../Context/CartContext";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import ReadOutLout from "./ReadOutLout";
 import { alignPropType } from "react-bootstrap/esm/types";
 import { AiOutlineSound } from "react-icons/ai";
@@ -143,6 +143,7 @@ export default function ProductDetails() {
   };
 
   return (
+    <HelmetProvider>
     <div>
     <Container style={{margin:"1rem", padding:"1rem"}}>
       <br />
@@ -217,5 +218,6 @@ export default function ProductDetails() {
     </Container>
     <Footer/>
     </div>
+    </HelmetProvider>
   );
 }

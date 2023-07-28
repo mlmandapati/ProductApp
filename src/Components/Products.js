@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Footer from './Footer.js';
 import { useDispatchCart } from "../Context/CartContext";
 
 export default function Products(props) {
@@ -88,6 +89,7 @@ export default function Products(props) {
     setSortBy(sortOrder);
   };
   return (
+    <div>
     <Container>
       <br />
       <div
@@ -163,5 +165,7 @@ export default function Products(props) {
         </Row>
       }
     </Container>
+    <Footer/>
+    </div>
   );
 }

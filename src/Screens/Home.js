@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Banner from "../Components/Banner";
 import Categories from "../Components/Categories";
+import Footer from '../Components/Footer.js';
 
 export default function Home(props) {
   const url = `https://cdn.contentstack.io/v3/content_types/${props.type}/entries?environment=preview`;
@@ -68,6 +69,7 @@ export default function Home(props) {
   console.log(blocks);
   return (
     <div>
+    <div>
       {/* {console.log("blocks", blocks[0])} */}
 
       {blocks.length > 0 &&
@@ -79,6 +81,8 @@ export default function Home(props) {
             return <Categories type="category_product" />;
           }
         })}
+    </div>
+    <Footer/>
     </div>
   );
 }

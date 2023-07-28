@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet";
 import ReadOutLout from "./ReadOutLout";
 import { alignPropType } from "react-bootstrap/esm/types";
 import { AiOutlineSound } from "react-icons/ai";
+import Footer from './Footer.js';
 
 export default function ProductDetails() {
   const params = useParams();
@@ -87,6 +88,7 @@ export default function ProductDetails() {
     getSingleEntry();
   }, [entryUid, contentTypeId]);
 
+  
   const dispatch = useDispatchCart();
   const addToCart = (product) => {
     dispatch({ type: "ADD", product });
@@ -129,7 +131,8 @@ export default function ProductDetails() {
   };
 
   return (
-    <Container>
+    <div>
+    <Container style={{margin:"1rem", padding:"1rem"}}>
       <br />
       {content && (
         <Helmet>
@@ -200,5 +203,7 @@ export default function ProductDetails() {
         </Row>
       )}
     </Container>
+    <Footer/>
+    </div>
   );
 }
